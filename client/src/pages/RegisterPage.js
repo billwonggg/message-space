@@ -2,7 +2,9 @@ import { useState } from "react";
 import { TextField, Select, InputLabel, FormControl, MenuItem } from "@mui/material";
 import { Button, Typography, Box, Container } from "@mui/material";
 
-const RegisterPage = ({ setUserData }) => {
+const ROOMOPTIONS = [...Array(50).keys()];
+
+const RegisterPage = ({ setUserData, socket }) => {
   const [input, setInput] = useState({
     name: "",
     room: "",
@@ -12,15 +14,19 @@ const RegisterPage = ({ setUserData }) => {
     setInput({ ...input, [name]: event.target.value });
   };
 
-  const handleSubmit = (event) => {
+  const joinRoom = (event) => {
     event.preventDefault();
     if (!input.name || !input.room) return;
 
-    // TODO: connect with backend socket.io
-
-    // clear input
-    setUserData({ name: input.name, room: input.room });
-    setInput({ name: "", room: "" });
+    try {
+      socket.emit("join_room", input);
+      // clear input
+      setUserData({ name: input.name, room: input.room });
+      setInput({ name: "", room: "" });
+    } catch (e) {
+      // handle error
+      console.log(e);
+    }
   };
 
   return (
@@ -33,7 +39,7 @@ const RegisterPage = ({ setUserData }) => {
           Register
         </Typography>
 
-        <form noValidate onSubmit={handleSubmit}>
+        <form noValidate onSubmit={joinRoom}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -51,9 +57,9 @@ const RegisterPage = ({ setUserData }) => {
               label="Room Number"
               onChange={handleChange("room")}
               value={input.room}
-              MenuProps={{ PaperProps: { sx: { maxHeight: "50vh" } } }}
+              MenuProps={{ PaperProps: { sx: { maxHeight: "30vh" } } }}
             >
-              {[...Array(50).keys()].map((i) => (
+              {ROOMOPTIONS.map((i) => (
                 <MenuItem value={i + 1} key={i}>
                   {i + 1}
                 </MenuItem>

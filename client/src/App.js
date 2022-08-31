@@ -19,7 +19,11 @@ const App = () => {
     <ThemeProvider theme={themeLight}>
       <BrowserRouter>
         <Routes>
-          <Route exact path="/register" element={<RegisterPage setUserData={setUserData} s />} />
+          <Route
+            exact
+            path="/register"
+            element={<RegisterPage setUserData={setUserData} socket={socket} />}
+          />
           <Route exact path="/chat" element={<ChatPage />} />
         </Routes>
       </BrowserRouter>
