@@ -3,7 +3,7 @@ import { Container, Grid, Paper, IconButton, Typography, TextField } from "@mui/
 import { FormControl, Box, Divider, List, ListItem } from "@mui/material";
 import SendRoundedIcon from "@mui/icons-material/SendRounded";
 
-const ChatArea = () => {
+const ChatArea = ({ socket }) => {
   const [message, setMessage] = useState("");
   const [chatMessages, setChatMessages] = useState([]);
 
