@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Textfield from "@mui/material/TextField";
+import { TextField, Select, InputLabel, FormControl, MenuItem } from "@mui/material";
 import { Button, Typography, Box, Container } from "@mui/material";
 
 const RegisterPage = ({ setUserData }) => {
@@ -29,11 +29,11 @@ const RegisterPage = ({ setUserData }) => {
         <Typography component="h1" variant="h5">
           Register
         </Typography>
+
         <form noValidate onSubmit={handleSubmit}>
-          <Textfield
+          <TextField
             variant="outlined"
             margin="normal"
-            required
             fullWidth
             label="Name"
             value={input.name}
@@ -42,18 +42,29 @@ const RegisterPage = ({ setUserData }) => {
             onChange={handleChange("name")}
           />
 
-          <Textfield
-            variant="outlined"
-            margin="normal"
-            required
+          <FormControl fullWidth margin="normal">
+            <InputLabel>Room Number</InputLabel>
+            <Select
+              label="Room Number"
+              onChange={handleChange("room")}
+              value={input.room}
+              MenuProps={{ PaperProps: { sx: { maxHeight: "50vh" } } }}
+            >
+              {[...Array(50).keys()].map((i) => (
+                <MenuItem value={i + 1} key={i}>
+                  {i + 1}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <Button
+            type="submit"
             fullWidth
-            label="Room Number"
-            value={input.room}
-            type="number"
-            autoFocus
-            onChange={handleChange("room")}
-          />
-          <Button type="submit" margin="normal" fullWidth variant="contained" color="primary">
+            variant="contained"
+            color="primary"
+            sx={{ mt: 2 }}
+            size="large"
+          >
             Join
           </Button>
         </form>
