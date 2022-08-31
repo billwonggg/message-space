@@ -24,7 +24,10 @@ const RegisterPage = ({ setUserData }) => {
   };
 
   return (
-    <Container component="main" maxWidth="sm">
+    <Container
+      component="main"
+      sx={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}
+    >
       <Box boxShadow={3} sx={{ padding: 8 }}>
         <Typography component="h1" variant="h5">
           Register
