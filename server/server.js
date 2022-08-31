@@ -19,6 +19,10 @@ const io = new Server(server, {
 
 io.on("connection", (socket) => {
   console.log(`User connected: ${socket.id}`);
+
+  socket.on("join_room", (data) => {
+    console.log(`User joined room: ${data}`);
+  });
 });
 
 server.listen(PORT, () => console.log(`Listening on port ${PORT}`));
