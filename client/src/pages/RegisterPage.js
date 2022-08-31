@@ -2,10 +2,10 @@ import { useState } from "react";
 import Textfield from "@mui/material/TextField";
 import { Button, Typography, Box, Container } from "@mui/material";
 
-const RegisterPage = () => {
+const RegisterPage = ({ setUserData }) => {
   const [input, setInput] = useState({
     name: "",
-    roomNumber: undefined,
+    room: "",
   });
 
   const handleChange = (name) => (event) => {
@@ -14,12 +14,13 @@ const RegisterPage = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (input.name === "" || input.roomNumber === undefined) return;
+    if (!input.name || !input.room) return;
 
     // TODO: connect with backend socket.io
 
     // clear input
-    setInput({ name: "", roomNumber: undefined });
+    setUserData({ name: input.name, room: input.room });
+    setInput({ name: "", room: "" });
   };
 
   return (
@@ -47,10 +48,10 @@ const RegisterPage = () => {
             required
             fullWidth
             label="Room Number"
-            value={input.roomNumber}
+            value={input.room}
             type="number"
             autoFocus
-            onChange={handleChange("roomNumber")}
+            onChange={handleChange("room")}
           />
           <Button type="submit" margin="normal" fullWidth variant="contained" color="primary">
             Join
