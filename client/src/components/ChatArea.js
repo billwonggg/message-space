@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { Container, Grid, Paper, IconButton, Typography, TextField } from "@mui/material";
-import { FormControl, Box, Divider, List, ListItem, ListItemText } from "@mui/material";
+import { FormControl, Box, Divider } from "@mui/material";
 import SendRoundedIcon from "@mui/icons-material/SendRounded";
 
 const ChatArea = ({ userData, socket }) => {
@@ -45,16 +45,38 @@ const ChatArea = ({ userData, socket }) => {
   };
 
   const getMessages = () => {
-    return chatMessages.map((msg, i) => (
-      <ListItem key={i}>
-        <ListItemText>{`${msg.sender}: ${msg.message}`}</ListItemText>
-      </ListItem>
-    ));
+    return chatMessages.map((msg, i) => {
+      const messagePos = msg.sender === userData.name ? "right" : "left";
+      return (
+        <Box key={i} sx={{ width: "100%", display: "flex", justifyContent: messagePos }}>
+          <Box sx={{ display: "flex", flexDirection: "column" }}>
+            {msg.sender !== userData.name && (
+              <Typography sx={{ pl: 1, fontSize: "13px" }}>{msg.sender}</Typography>
+            )}
+            <Typography
+              sx={{
+                p: 2,
+                pl: 3,
+                pr: 3,
+                m: "5px",
+                borderRadius: { xs: "30px", md: "35px" },
+                backgroundColor: "#4db8ff",
+                display: "inline-block",
+                fontSize: "18px",
+                maxWidth: "40vw",
+              }}
+            >
+              {msg.message}
+            </Typography>
+          </Box>
+        </Box>
+      );
+    });
   };
 
   return (
     <Container>
-      <Paper elevation={6} sx={{ mt: 4 }}>
+      <Paper elevation={6} sx={{ mt: 4, borderRadius: { xs: "15px", md: "25px" } }}>
         <Box p={3}>
           <Typography variant="h4" fontWeight={600} fontFamily="monospace">
             Room {userData.room}
@@ -64,8 +86,8 @@ const ChatArea = ({ userData, socket }) => {
           </Typography>
           <Divider />
           <Grid container spacing={2} alignItems="center">
-            <Grid sx={{ height: "65vh" }} xs={12} item>
-              <List sx={{ overflow: "auto" }}>{getMessages()}</List>
+            <Grid sx={{ height: "65vh", overflowY: "auto", mt: 2 }} xs={12} item>
+              {getMessages()}
             </Grid>
             <Grid xs={10} md={11} item>
               <FormControl fullWidth>
