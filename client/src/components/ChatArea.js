@@ -27,10 +27,12 @@ const ChatArea = ({ userData, socket }) => {
   };
 
   useEffect(() => {
-    socket.on("receive_message", (data) => {
+    const handler = (data) => {
       setChatMessages((messages) => [...messages, data]);
-    });
-  }, [socket]);
+    };
+    socket.on("receive_message", handler);
+    return () => socket.off("receive_message", handler);
+  });
 
   const handleMessageChange = (event) => {
     setMessage(event.target.value);
