@@ -22,7 +22,7 @@ const App = () => {
         <Routes>
           <Route
             exact
-            path="/register"
+            path="/"
             element={<RegisterPage setUserData={setUserData} socket={socket} />}
           />
           <Route exact path="/chat" element={<ChatPage userData={userData} socket={socket} />} />

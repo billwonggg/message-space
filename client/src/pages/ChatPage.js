@@ -9,7 +9,7 @@ const ChatPage = (props) => {
 
   useEffect(() => {
     if (!userData.name || !userData.room) {
-      navigate("/register");
+      navigate("/");
     }
   });
 

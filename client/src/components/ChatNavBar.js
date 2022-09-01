@@ -15,7 +15,7 @@ const ChatNavBar = ({ userData, socket }) => {
     // TODO leave chat
     try {
       socket.emit("leave_room", userData);
-      navigate("/register");
+      navigate("/");
     } catch (e) {
       console.log(e);
     }
