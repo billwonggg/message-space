@@ -27,9 +27,9 @@ io.on("connection", (socket) => {
 
   socket.on("send_message", (messageData) => {
     console.log(
-      `${messageData.sender} sent "${messageData.message}" in room ${messageData.room} at time ${messageData.time}`
+      `${messageData.sender} sent "${messageData.message}" to room ${messageData.room} at time ${messageData.time}`
     );
-    socket.broadcast.to(messageData.room).emit("receive_message", messageData);
+    socket.to(messageData.room).emit("receive_message", messageData);
   });
 
   socket.on("leave_room", (data) => {

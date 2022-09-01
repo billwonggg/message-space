@@ -18,11 +18,12 @@ const ChatArea = ({ userData, socket }) => {
 
     try {
       await socket.emit("send_message", messageData);
-      setMessage("");
-      setChatMessages([...chatMessages, messageData]);
     } catch (err) {
       console.log(err);
+      return;
     }
+    setMessage("");
+    setChatMessages([...chatMessages, messageData]);
   };
 
   useEffect(() => {
@@ -53,8 +54,11 @@ const ChatArea = ({ userData, socket }) => {
     <Container>
       <Paper elevation={6} sx={{ mt: 4 }}>
         <Box p={3}>
-          <Typography variant="h4" gutterBottom fontFamily="monospace" fontWeight={600}>
+          <Typography variant="h4" fontWeight={600} fontFamily="monospace">
             Room {userData.room}
+          </Typography>
+          <Typography variant="h6" gutterBottom fontFamily="monospace">
+            Signed in as {userData.name}
           </Typography>
           <Divider />
           <Grid container spacing={2} alignItems="center">

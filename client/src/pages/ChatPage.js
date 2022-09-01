@@ -11,7 +11,7 @@ const ChatPage = (props) => {
     if (!userData.name || !userData.room) {
       navigate("/register");
     }
-  }, []);
+  });
 
   return (
     <div>

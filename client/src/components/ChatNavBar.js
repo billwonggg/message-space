@@ -22,7 +22,7 @@ const ChatNavBar = ({ userData, socket }) => {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" color="secondary">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <GroupsRoundedIcon fontSize="large" sx={{ display: "flex", mr: 2 }} />

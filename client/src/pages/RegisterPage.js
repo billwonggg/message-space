@@ -35,7 +35,12 @@ const RegisterPage = ({ setUserData, socket }) => {
   return (
     <Container
       component="main"
-      sx={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+      }}
     >
       <Box boxShadow={3} sx={{ padding: { xs: 4, md: 8 }, borderRadius: "10px" }}>
         <Typography
