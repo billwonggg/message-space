@@ -37,8 +37,11 @@ const RegisterPage = ({ setUserData, socket }) => {
       component="main"
       sx={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}
     >
-      <Box boxShadow={3} sx={{ padding: 8 }}>
-        <Typography component="h1" variant="h5">
+      <Box boxShadow={3} sx={{ padding: { xs: 4, md: 8 }, borderRadius: "10px" }}>
+        <Typography
+          component="h1"
+          sx={{ fontSize: { xs: 28, md: 36 }, textAlign: "center", fontFamily: "Monospace" }}
+        >
           MessageSpace
         </Typography>
 
