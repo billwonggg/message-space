@@ -1,18 +1,35 @@
 import { useEffect, useState, useRef } from "react";
 import { Container, Grid, Paper, IconButton, Typography, TextField } from "@mui/material";
-import { FormControl, Box, Divider, List, ListItem } from "@mui/material";
+import { FormControl, Box, Divider, List, ListItem, ListItemText } from "@mui/material";
 import SendRoundedIcon from "@mui/icons-material/SendRounded";
 
 const ChatArea = ({ userData, socket }) => {
   const [message, setMessage] = useState("");
   const [chatMessages, setChatMessages] = useState([]);
 
-  const sendMessage = () => {
-    if (message !== "") {
-      // handle send
+  const sendMessage = async () => {
+    if (message === "") return;
+    const messageData = {
+      sender: userData.name,
+      room: userData.room,
+      message: message,
+      time: new Date(Date.now()),
+    };
+
+    try {
+      await socket.emit("send_message", messageData);
       setMessage("");
+      setChatMessages([...chatMessages, messageData]);
+    } catch (err) {
+      console.log(err);
     }
   };
+
+  useEffect(() => {
+    socket.on("receive_message", (data) => {
+      setChatMessages((messages) => [...messages, data]);
+    });
+  }, [socket]);
 
   const handleMessageChange = (event) => {
     setMessage(event.target.value);
@@ -25,7 +42,11 @@ const ChatArea = ({ userData, socket }) => {
   };
 
   const getMessages = () => {
-    return chatMessages.map((message, i) => <ListItem key={i}>{message}</ListItem>);
+    return chatMessages.map((msg, i) => (
+      <ListItem key={i}>
+        <ListItemText>{`${msg.sender}: ${msg.message}`}</ListItemText>
+      </ListItem>
+    ));
   };
 
   return (
@@ -38,7 +59,7 @@ const ChatArea = ({ userData, socket }) => {
           <Divider />
           <Grid container spacing={2} alignItems="center">
             <Grid sx={{ height: "65vh" }} xs={12} item>
-              <List sx={{ overflow: "auto" }}>{getMessages}</List>
+              <List sx={{ overflow: "auto" }}>{getMessages()}</List>
             </Grid>
             <Grid xs={10} md={11} item>
               <FormControl fullWidth>
