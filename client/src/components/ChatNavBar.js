@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -7,10 +8,17 @@ import Button from "@mui/material/Button";
 import LogoutIcon from "@mui/icons-material/Logout";
 import GroupsRoundedIcon from "@mui/icons-material/GroupsRounded";
 
-const ChatNavBar = () => {
+const ChatNavBar = ({ userData, socket }) => {
+  const navigate = useNavigate();
+
   const handleLogout = () => {
     // TODO leave chat
-    console.log("Logout");
+    try {
+      socket.emit("leave_room", userData);
+      navigate("/register");
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (

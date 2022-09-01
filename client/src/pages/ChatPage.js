@@ -2,11 +2,11 @@ import React from "react";
 import ChatArea from "../components/ChatArea";
 import ChatNavBar from "../components/ChatNavBar";
 
-const ChatPage = () => {
+const ChatPage = (props) => {
   return (
     <div>
-      <ChatNavBar />
-      <ChatArea />
+      <ChatNavBar {...props} />
+      <ChatArea {...props} />
     </div>
   );
 };

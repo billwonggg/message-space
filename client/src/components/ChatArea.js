@@ -3,13 +3,12 @@ import { Container, Grid, Paper, IconButton, Typography, TextField } from "@mui/
 import { FormControl, Box, Divider, List, ListItem } from "@mui/material";
 import SendRoundedIcon from "@mui/icons-material/SendRounded";
 
-const ChatArea = ({ socket }) => {
+const ChatArea = ({ userData, socket }) => {
   const [message, setMessage] = useState("");
   const [chatMessages, setChatMessages] = useState([]);
 
   const sendMessage = () => {
     if (message !== "") {
-      console.log("Send!");
       // handle send
       setMessage("");
     }
@@ -34,7 +33,7 @@ const ChatArea = ({ socket }) => {
       <Paper elevation={6} sx={{ mt: 4 }}>
         <Box p={3}>
           <Typography variant="h4" gutterBottom fontFamily="monospace" fontWeight={600}>
-            Room 5
+            Room {userData.room}
           </Typography>
           <Divider />
           <Grid container spacing={2} alignItems="center">

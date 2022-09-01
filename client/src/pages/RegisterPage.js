@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { TextField, Select, InputLabel, FormControl, MenuItem } from "@mui/material";
 import { Button, Typography, Box, Container } from "@mui/material";
 
@@ -9,6 +10,8 @@ const RegisterPage = ({ setUserData, socket }) => {
     name: "",
     room: "",
   });
+
+  const navigate = useNavigate();
 
   const handleChange = (name) => (event) => {
     setInput({ ...input, [name]: event.target.value });
@@ -22,7 +25,7 @@ const RegisterPage = ({ setUserData, socket }) => {
       socket.emit("join_room", input);
       // clear input
       setUserData({ name: input.name, room: input.room });
-      setInput({ name: "", room: "" });
+      navigate("/chat");
     } catch (e) {
       // handle error
       console.log(e);
@@ -36,7 +39,7 @@ const RegisterPage = ({ setUserData, socket }) => {
     >
       <Box boxShadow={3} sx={{ padding: 8 }}>
         <Typography component="h1" variant="h5">
-          Register
+          MessageSpace
         </Typography>
 
         <form noValidate onSubmit={joinRoom}>

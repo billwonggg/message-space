@@ -14,7 +14,7 @@ const App = () => {
     username: "",
     room: undefined,
   });
-  console.log(userData);
+
   return (
     <ThemeProvider theme={themeLight}>
       <BrowserRouter>
@@ -24,7 +24,7 @@ const App = () => {
             path="/register"
             element={<RegisterPage setUserData={setUserData} socket={socket} />}
           />
-          <Route exact path="/chat" element={<ChatPage />} />
+          <Route exact path="/chat" element={<ChatPage userData={userData} socket={socket} />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
