@@ -1,12 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Container, Grid, IconButton, Typography, TextField } from "@mui/material";
 import { FormControl, Box, Divider } from "@mui/material";
+import { toast } from "react-toastify";
 import SendRoundedIcon from "@mui/icons-material/SendRounded";
 import ChatMessages from "./ChatMessages";
+import { SelectThemeContext } from "../theme/ThemeContext";
 
 const ChatArea = ({ userData, socket }) => {
   const [message, setMessage] = useState("");
   const [chatMessages, setChatMessages] = useState([]);
+  const [darkMode, _] = useContext(SelectThemeContext);
 
   const sendMessage = async () => {
     if (message === "") return;
@@ -33,6 +36,28 @@ const ChatArea = ({ userData, socket }) => {
     };
     socket.on("receive_message", handler);
     return () => socket.off("receive_message", handler);
+  });
+
+  const getToastType = (type) => {
+    let toastType = null;
+    if (type === "info") toastType = toast.TYPE.INFO;
+    else if (type === "error") toastType = toast.TYPE.ERROR;
+    else if (type === "success") toastType = toast.TYPE.SUCCESS;
+    return toastType;
+  };
+
+  useEffect(() => {
+    const handler = (data) => {
+      const toastType = getToastType(data.type);
+      toast(data.msg, {
+        position: "top-center",
+        autoClose: 4000,
+        theme: darkMode ? "dark" : "light",
+        type: toastType,
+      });
+    };
+    socket.on("receive_admin_message", handler);
+    return () => socket.off("receive_admin_message");
   });
 
   const handleMessageChange = (event) => {
