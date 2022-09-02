@@ -21,6 +21,9 @@ export const themeLight = createTheme({
       rightText: "#fff",
       background: "#fff",
     },
+    register: {
+      background: "#fff",
+    },
   },
 });
 
@@ -43,6 +46,9 @@ export const themeDark = createTheme({
       right: blue.A700,
       leftText: "#fff",
       rightText: "#fff",
+      background: "#1c1c1c",
+    },
+    register: {
       background: "#1c1c1c",
     },
   },

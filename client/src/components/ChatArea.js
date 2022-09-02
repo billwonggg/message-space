@@ -1,12 +1,11 @@
 import { useEffect, useState, useRef } from "react";
-import { Container, Grid, IconButton, Typography, TextField, useTheme } from "@mui/material";
+import { Container, Grid, IconButton, Typography, TextField } from "@mui/material";
 import { FormControl, Box, Divider } from "@mui/material";
 import SendRoundedIcon from "@mui/icons-material/SendRounded";
 
 const ChatArea = ({ userData, socket }) => {
   const [message, setMessage] = useState("");
   const [chatMessages, setChatMessages] = useState([]);
-  const theme = useTheme();
 
   const sendMessage = async () => {
     if (message === "") return;

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { TextField, Select, InputLabel, FormControl, MenuItem } from "@mui/material";
+import { TextField, Select, InputLabel, FormControl, MenuItem, useTheme } from "@mui/material";
 import { Button, Typography, Box, Container } from "@mui/material";
 
 const ROOMOPTIONS = [...Array(50).keys()];
@@ -10,6 +10,8 @@ const RegisterPage = ({ setUserData, socket }) => {
     name: "",
     room: "",
   });
+
+  const theme = useTheme();
 
   const navigate = useNavigate();
 
@@ -33,16 +35,24 @@ const RegisterPage = ({ setUserData, socket }) => {
   };
 
   return (
-    <Container
-      component="main"
-      sx={{
+    <div
+      style={{
+        minHeight: "100vh",
+        backgroundImage: theme.palette.background.bgGradient,
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        height: "100vh",
       }}
     >
-      <Box boxShadow={3} sx={{ padding: { xs: 4, md: 8 }, borderRadius: "10px" }}>
+      <Box
+        boxShadow={3}
+        backgroundColor="register.background"
+        sx={{
+          width: { xs: "360px", md: "550px" },
+          padding: { xs: 4, md: 8 },
+          borderRadius: "10px",
+        }}
+      >
         <Typography
           component="h1"
           sx={{ fontSize: { xs: 28, md: 36 }, textAlign: "center", fontFamily: "Monospace" }}
@@ -89,7 +99,7 @@ const RegisterPage = ({ setUserData, socket }) => {
           </Button>
         </form>
       </Box>
-    </Container>
+    </div>
   );
 };
 
