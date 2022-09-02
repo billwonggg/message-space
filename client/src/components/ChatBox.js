@@ -1,7 +1,8 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { Container, Grid, IconButton, Typography, TextField } from "@mui/material";
 import { FormControl, Box, Divider } from "@mui/material";
 import SendRoundedIcon from "@mui/icons-material/SendRounded";
+import ChatMessages from "./ChatMessages";
 
 const ChatArea = ({ userData, socket }) => {
   const [message, setMessage] = useState("");
@@ -44,42 +45,6 @@ const ChatArea = ({ userData, socket }) => {
     }
   };
 
-  const getMessages = () => {
-    let currOther = "";
-    return chatMessages.map((msg, i) => {
-      const messagePos = msg.sender === userData.name ? "right" : "left";
-      const displayOtherName = msg.sender !== userData.name && msg.sender !== currOther;
-      currOther = msg.sender;
-      return (
-        <Box key={i} sx={{ width: "100%", display: "flex", justifyContent: messagePos }}>
-          <Box sx={{ display: "flex", flexDirection: "column" }}>
-            {displayOtherName && (
-              <Typography sx={{ pl: 1, fontSize: { xs: "13px", md: "14px" } }}>
-                {msg.sender}
-              </Typography>
-            )}
-            <Typography
-              color={`chat.${messagePos}Text`}
-              sx={{
-                p: 1,
-                pl: 2,
-                pr: 2,
-                m: "3px",
-                borderRadius: { xs: "17px", md: "20px" },
-                backgroundColor: `chat.${messagePos}`,
-                display: "inline-block",
-                fontSize: { xs: "16px", md: "18px" },
-                maxWidth: { xs: "250px", md: "750px" },
-              }}
-            >
-              {msg.message}
-            </Typography>
-          </Box>
-        </Box>
-      );
-    });
-  };
-
   return (
     <Container>
       <Box
@@ -104,7 +69,7 @@ const ChatArea = ({ userData, socket }) => {
         <Divider />
         <Grid container spacing={2} alignItems="center">
           <Grid sx={{ height: "65vh", overflowY: "auto", mt: 2, p: 1 }} xs={12} item>
-            {getMessages()}
+            <ChatMessages userData={userData} chatMessages={chatMessages} />
           </Grid>
           <Grid xs={10} md={11} item>
             <FormControl fullWidth>

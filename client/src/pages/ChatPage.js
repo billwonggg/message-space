@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useTheme } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import ChatArea from "../components/ChatArea";
+import ChatBox from "../components/ChatBox";
 import ChatNavBar from "../components/ChatNavBar";
 
 const ChatPage = (props) => {
@@ -23,7 +23,7 @@ const ChatPage = (props) => {
       }}
     >
       <ChatNavBar {...props} />
-      <ChatArea {...props} />
+      <ChatBox {...props} />
     </div>
   );
 };
