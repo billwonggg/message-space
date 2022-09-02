@@ -1,24 +1,23 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Link, useTheme } from "@mui/material";
 
 const Footer = () => {
+  const theme = useTheme();
   return (
-    <Box sx={{ position: "absolute", bottom: "10px" }}>
+    <Box sx={{ position: "absolute", bottom: "10px" }} color="register.background">
       <Typography
         fontFamily="monospace"
         fontWeight="600"
-        color="white"
         sx={{ fontSize: { xs: "14px", md: "16px" }, textAlign: "center" }}
       >
         &copy; {new Date().getFullYear()} Bill Wong.&nbsp;
-        <a
+        <Link
           href="https://github.com/billwonggg/message-space"
           target="_blank"
           rel="noopener noreferrer"
-          textAlign="center"
-          style={{ color: "white" }}
+          underline="hover"
         >
           GitHub
-        </a>
+        </Link>
       </Typography>
     </Box>
   );

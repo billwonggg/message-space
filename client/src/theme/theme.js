@@ -31,7 +31,7 @@ export const themeDark = createTheme({
   palette: {
     mode: "dark",
     primary: {
-      main: blueGrey[100],
+      main: indigo.A400,
     },
     secondary: {
       main: "#000",
@@ -49,7 +49,7 @@ export const themeDark = createTheme({
       background: "#1c1c1c",
     },
     register: {
-      background: "#1c1c1c",
+      background: "#1f1f1f",
     },
   },
 });
