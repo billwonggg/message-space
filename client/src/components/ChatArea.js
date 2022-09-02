@@ -87,10 +87,18 @@ const ChatArea = ({ userData, socket }) => {
         backgroundColor="chat.background"
         sx={{ mt: { xs: 2, md: 4 }, borderRadius: { xs: "15px", md: "25px" }, boxShadow: 12 }}
       >
-        <Typography variant="h4" fontWeight={600} fontFamily="monospace">
+        <Typography
+          fontWeight={600}
+          fontFamily="monospace"
+          sx={{ fontSize: { xs: "24px", md: "28px" } }}
+        >
           Room {userData.room}
         </Typography>
-        <Typography variant="h6" gutterBottom fontFamily="monospace">
+        <Typography
+          gutterBottom
+          fontFamily="monospace"
+          sx={{ fontSize: { xs: "14px", md: "18px" } }}
+        >
           Signed in as {userData.name}
         </Typography>
         <Divider />
