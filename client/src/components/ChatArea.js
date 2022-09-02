@@ -45,25 +45,28 @@ const ChatArea = ({ userData, socket }) => {
   };
 
   const getMessages = () => {
+    let currOther = "";
     return chatMessages.map((msg, i) => {
       const messagePos = msg.sender === userData.name ? "right" : "left";
+      const displayOtherName = msg.sender !== userData.name && msg.sender !== currOther;
+      currOther = msg.sender;
       return (
         <Box key={i} sx={{ width: "100%", display: "flex", justifyContent: messagePos }}>
           <Box sx={{ display: "flex", flexDirection: "column" }}>
-            {msg.sender !== userData.name && (
-              <Typography sx={{ pl: 1, fontSize: "13px" }}>{msg.sender}</Typography>
+            {displayOtherName && (
+              <Typography sx={{ pl: 1, fontSize: "14px" }}>{msg.sender}</Typography>
             )}
             <Typography
               sx={{
-                p: 2,
-                pl: 3,
-                pr: 3,
-                m: "5px",
-                borderRadius: { xs: "30px", md: "35px" },
+                p: 1,
+                pl: 2,
+                pr: 2,
+                m: "3px",
+                borderRadius: { xs: "17px", md: "20px" },
                 backgroundColor: "#4db8ff",
                 display: "inline-block",
                 fontSize: "18px",
-                maxWidth: "40vw",
+                maxWidth: { xs: "65vw", md: "45vw" },
               }}
             >
               {msg.message}
