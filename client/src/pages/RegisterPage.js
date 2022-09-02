@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { TextField, Select, InputLabel, FormControl, MenuItem, useTheme } from "@mui/material";
 import { Button, Typography, Box } from "@mui/material";
 import Footer from "../components/Footer";
+import ThemeButton from "../components/ThemeButton";
 
 const ROOMOPTIONS = [...Array(50).keys()];
 
@@ -45,6 +46,14 @@ const RegisterPage = ({ setUserData, socket }) => {
         alignItems: "center",
       }}
     >
+      <ThemeButton
+        sx={{
+          position: "absolute",
+          top: "15px",
+          right: "10px",
+          color: theme.palette.register.background,
+        }}
+      />
       <Box
         boxShadow={3}
         backgroundColor="register.background"

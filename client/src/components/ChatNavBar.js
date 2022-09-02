@@ -1,16 +1,12 @@
-import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { AppBar, Toolbar, Typography, Container, Button } from "@mui/material";
+import { AppBar, Toolbar, Typography, Container, Button, useTheme } from "@mui/material";
 import LogoutIcon from "@mui/icons-material/Logout";
 import GroupsRoundedIcon from "@mui/icons-material/GroupsRounded";
-import LightModeIcon from "@mui/icons-material/LightMode";
-import DarkModeIcon from "@mui/icons-material/DarkMode";
-import { IconButton, useTheme } from "@mui/material";
-import { SelectThemeContext } from "../theme/ThemeContext";
+import ThemeButton from "./ThemeButton";
 
 const ChatNavBar = ({ userData, socket }) => {
   const navigate = useNavigate();
-  const [darkMode, toggleTheme] = useContext(SelectThemeContext);
+
   const theme = useTheme();
 
   const handleLogout = () => {
@@ -47,13 +43,7 @@ const ChatNavBar = ({ userData, socket }) => {
           >
             MessageSpace
           </Typography>
-
-          <IconButton
-            onClick={toggleTheme}
-            sx={{ mr: { md: 3 }, color: theme.palette.secondary.navBar }}
-          >
-            {darkMode ? <DarkModeIcon /> : <LightModeIcon />}
-          </IconButton>
+          <ThemeButton sx={{ mr: { md: 3 }, color: theme.palette.secondary.navBar }} />
 
           <Button color="inherit" onClick={handleLogout}>
             <Typography

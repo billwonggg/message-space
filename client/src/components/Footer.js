@@ -1,7 +1,6 @@
-import { Box, Typography, Link, useTheme } from "@mui/material";
+import { Box, Typography, Link } from "@mui/material";
 
 const Footer = () => {
-  const theme = useTheme();
   return (
     <Box sx={{ position: "absolute", bottom: "10px" }} color="register.background">
       <Typography

@@ -1,10 +1,10 @@
 import { createTheme } from "@mui/material";
-import { indigo, grey, blue, blueGrey } from "@mui/material/colors";
+import { indigo, grey, blue } from "@mui/material/colors";
 
 export const themeLight = createTheme({
   palette: {
     primary: {
-      main: indigo[400],
+      main: indigo.A200,
     },
     secondary: {
       main: "#eee",
