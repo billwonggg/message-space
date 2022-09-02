@@ -7,7 +7,7 @@ export const themeLight = createTheme({
       main: indigo[400],
     },
     secondary: {
-      main: "#fff",
+      main: "#eee",
       navBar: "#000",
     },
     background: {
@@ -19,7 +19,7 @@ export const themeLight = createTheme({
       right: blue.A400,
       leftText: "#000",
       rightText: "#fff",
-      background: "#f5f5f5",
+      background: "#fff",
     },
   },
 });
@@ -43,7 +43,7 @@ export const themeDark = createTheme({
       right: blue.A700,
       leftText: "#fff",
       rightText: "#fff",
-      background: "#1a1a1a",
+      background: "#1c1c1c",
     },
   },
 });
