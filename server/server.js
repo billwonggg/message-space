@@ -24,7 +24,7 @@ io.on("connection", (socket) => {
     socket.join(data.room);
     socket
       .to(data.room)
-      .emit("receive_admin_message", { msg: `${data.name} has joined the chat.`, type: "info" });
+      .emit("receive_admin_message", { msg: `${data.name} has joined the room.`, type: "info" });
     console.log(`${data.name} joined room ${data.room}`);
   });
 
@@ -39,7 +39,7 @@ io.on("connection", (socket) => {
     console.log(`${data.name} left room ${data.room}`);
     socket
       .to(data.room)
-      .emit("receive_admin_message", { msg: `${data.name} has left the chat.`, type: "info" });
+      .emit("receive_admin_message", { msg: `${data.name} has left the room.`, type: "info" });
   });
 });
 
