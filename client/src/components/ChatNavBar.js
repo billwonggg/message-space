@@ -1,15 +1,17 @@
-import React from "react";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import Button from "@mui/material/Button";
+import { AppBar, Toolbar, Typography, Container, Button } from "@mui/material";
 import LogoutIcon from "@mui/icons-material/Logout";
 import GroupsRoundedIcon from "@mui/icons-material/GroupsRounded";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import { IconButton, useTheme } from "@mui/material";
+import { SelectThemeContext } from "../theme/ThemeContext";
 
 const ChatNavBar = ({ userData, socket }) => {
   const navigate = useNavigate();
+  const [darkMode, toggleTheme] = useContext(SelectThemeContext);
+  const theme = useTheme();
 
   const handleLogout = () => {
     // TODO leave chat
@@ -38,13 +40,21 @@ const ChatNavBar = ({ userData, socket }) => {
               color: "inherit",
               textDecoration: "none",
               fontSize: {
-                xs: 26,
+                xs: 24,
                 md: 32,
               },
             }}
           >
             MessageSpace
           </Typography>
+
+          <IconButton
+            onClick={toggleTheme}
+            sx={{ mr: { md: 3 }, color: theme.palette.secondary.navBar }}
+          >
+            {darkMode ? <DarkModeIcon /> : <LightModeIcon />}
+          </IconButton>
+
           <Button color="inherit" onClick={handleLogout}>
             <Typography
               variant="h6"
@@ -57,7 +67,7 @@ const ChatNavBar = ({ userData, socket }) => {
             >
               Leave Room
             </Typography>
-            <LogoutIcon sx={{ ml: 2 }} />
+            <LogoutIcon sx={{ ml: { md: 2 } }} />
           </Button>
         </Toolbar>
       </Container>

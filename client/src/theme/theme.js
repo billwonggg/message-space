@@ -7,17 +7,19 @@ export const themeLight = createTheme({
       main: indigo[300],
       leftChat: grey[200],
       rightChat: blue.A400,
-      leftChatText: "black",
+      leftChatText: "#000",
       rightChatText: "#fff",
     },
     secondary: {
-      main: deepPurple[200],
+      main: "#fff",
+      navBar: "#000",
     },
     error: {
       main: red.A400,
     },
     background: {
       default: "#fff",
+      bgGradient: "linear-gradient(to top, rgba(252,92,125,0.9), rgba(106,130,251,0.9))",
     },
   },
 });
@@ -28,9 +30,21 @@ export const themeDark = createTheme({
     type: "dark",
     primary: {
       main: "#006e56",
+      leftChat: grey[200],
+      rightChat: blue.A400,
+      leftChatText: "#000",
+      rightChatText: "#fff",
     },
     secondary: {
-      main: "#fafafa",
+      main: grey[900],
+      navBar: "#fff",
+    },
+    error: {
+      main: red.A400,
+    },
+    background: {
+      default: grey[800],
+      bgGradient: "linear-gradient(to bottom, #355c7d, #6c5b7b, #c06c84)",
     },
   },
 });
