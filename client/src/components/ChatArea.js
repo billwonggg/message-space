@@ -1,11 +1,12 @@
 import { useEffect, useState, useRef } from "react";
-import { Container, Grid, Paper, IconButton, Typography, TextField } from "@mui/material";
+import { Container, Grid, IconButton, Typography, TextField, useTheme } from "@mui/material";
 import { FormControl, Box, Divider } from "@mui/material";
 import SendRoundedIcon from "@mui/icons-material/SendRounded";
 
 const ChatArea = ({ userData, socket }) => {
   const [message, setMessage] = useState("");
   const [chatMessages, setChatMessages] = useState([]);
+  const theme = useTheme();
 
   const sendMessage = async () => {
     if (message === "") return;
@@ -59,14 +60,14 @@ const ChatArea = ({ userData, socket }) => {
               </Typography>
             )}
             <Typography
-              color={`primary.${messagePos}ChatText`}
+              color={`chat.${messagePos}Text`}
               sx={{
                 p: 1,
                 pl: 2,
                 pr: 2,
                 m: "3px",
                 borderRadius: { xs: "17px", md: "20px" },
-                backgroundColor: `primary.${messagePos}Chat`,
+                backgroundColor: `chat.${messagePos}`,
                 display: "inline-block",
                 fontSize: { xs: "16px", md: "18px" },
                 maxWidth: { xs: "250px", md: "750px" },
@@ -82,38 +83,41 @@ const ChatArea = ({ userData, socket }) => {
 
   return (
     <Container>
-      <Paper elevation={6} sx={{ mt: 4, borderRadius: { xs: "15px", md: "25px" } }}>
-        <Box p={3}>
-          <Typography variant="h4" fontWeight={600} fontFamily="monospace">
-            Room {userData.room}
-          </Typography>
-          <Typography variant="h6" gutterBottom fontFamily="monospace">
-            Signed in as {userData.name}
-          </Typography>
-          <Divider />
-          <Grid container spacing={2} alignItems="center">
-            <Grid sx={{ height: "65vh", overflowY: "auto", mt: 2, p: 1 }} xs={12} item>
-              {getMessages()}
-            </Grid>
-            <Grid xs={10} md={11} item>
-              <FormControl fullWidth>
-                <TextField
-                  onChange={handleMessageChange}
-                  onKeyDown={handleEnterKey}
-                  value={message}
-                  placeholder="Write a message..."
-                  variant="outlined"
-                />
-              </FormControl>
-            </Grid>
-            <Grid xs={1} md={1} item>
-              <IconButton onClick={sendMessage} aria-label="send" color="primary">
-                <SendRoundedIcon sx={{ fontSize: 32 }} />
-              </IconButton>
-            </Grid>
+      <Box
+        p={3}
+        backgroundColor="chat.background"
+        sx={{ mt: { xs: 2, md: 4 }, borderRadius: { xs: "15px", md: "25px" }, boxShadow: 12 }}
+      >
+        <Typography variant="h4" fontWeight={600} fontFamily="monospace">
+          Room {userData.room}
+        </Typography>
+        <Typography variant="h6" gutterBottom fontFamily="monospace">
+          Signed in as {userData.name}
+        </Typography>
+        <Divider />
+        <Grid container spacing={2} alignItems="center">
+          <Grid sx={{ height: "65vh", overflowY: "auto", mt: 2, p: 1 }} xs={12} item>
+            {getMessages()}
           </Grid>
-        </Box>
-      </Paper>
+          <Grid xs={10} md={11} item>
+            <FormControl fullWidth>
+              <TextField
+                onChange={handleMessageChange}
+                onKeyDown={handleEnterKey}
+                value={message}
+                placeholder="Write a message..."
+                variant="outlined"
+                size="small"
+              />
+            </FormControl>
+          </Grid>
+          <Grid xs={1} md={1} item>
+            <IconButton onClick={sendMessage} aria-label="send" color="primary">
+              <SendRoundedIcon sx={{ fontSize: 32 }} />
+            </IconButton>
+          </Grid>
+        </Grid>
+      </Box>
     </Container>
   );
 };
