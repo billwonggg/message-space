@@ -54,7 +54,9 @@ const ChatArea = ({ userData, socket }) => {
         <Box key={i} sx={{ width: "100%", display: "flex", justifyContent: messagePos }}>
           <Box sx={{ display: "flex", flexDirection: "column" }}>
             {displayOtherName && (
-              <Typography sx={{ pl: 1, fontSize: "14px" }}>{msg.sender}</Typography>
+              <Typography sx={{ pl: 1, fontSize: { xs: "13px", md: "14px" } }}>
+                {msg.sender}
+              </Typography>
             )}
             <Typography
               color={`primary.${messagePos}ChatText`}
@@ -66,8 +68,8 @@ const ChatArea = ({ userData, socket }) => {
                 borderRadius: { xs: "17px", md: "20px" },
                 backgroundColor: `primary.${messagePos}Chat`,
                 display: "inline-block",
-                fontSize: "18px",
-                maxWidth: { xs: "65vw", md: "45vw" },
+                fontSize: { xs: "16px", md: "18px" },
+                maxWidth: { xs: "250px", md: "750px" },
               }}
             >
               {msg.message}
@@ -90,7 +92,7 @@ const ChatArea = ({ userData, socket }) => {
           </Typography>
           <Divider />
           <Grid container spacing={2} alignItems="center">
-            <Grid sx={{ height: "65vh", overflowY: "auto", mt: 2 }} xs={12} item>
+            <Grid sx={{ height: "65vh", overflowY: "auto", mt: 2, p: 1 }} xs={12} item>
               {getMessages()}
             </Grid>
             <Grid xs={10} md={11} item>
