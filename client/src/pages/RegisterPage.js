@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { TextField, Select, InputLabel, FormControl, MenuItem, useTheme } from "@mui/material";
-import { Button, Typography, Box, Container } from "@mui/material";
+import { Button, Typography, Box } from "@mui/material";
+import Footer from "../components/Footer";
 
 const ROOMOPTIONS = [...Array(50).keys()];
 
@@ -99,6 +100,7 @@ const RegisterPage = ({ setUserData, socket }) => {
           </Button>
         </form>
       </Box>
+      <Footer />
     </div>
   );
 };
