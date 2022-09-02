@@ -68,7 +68,11 @@ const ChatArea = ({ userData, socket }) => {
         </Typography>
         <Divider />
         <Grid container spacing={2} alignItems="center">
-          <Grid sx={{ height: "65vh", overflowY: "auto", mt: 2, p: 1 }} xs={12} item>
+          <Grid
+            sx={{ height: { xs: "65vh", md: "60vh" }, overflowY: "auto", mt: 2, p: 1 }}
+            xs={12}
+            item
+          >
             <ChatMessages userData={userData} chatMessages={chatMessages} />
           </Grid>
           <Grid xs={10} md={11} item>

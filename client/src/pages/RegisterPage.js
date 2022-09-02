@@ -65,7 +65,12 @@ const RegisterPage = ({ setUserData, socket }) => {
       >
         <Typography
           component="h1"
-          sx={{ fontSize: { xs: 28, md: 36 }, textAlign: "center", fontFamily: "Monospace" }}
+          sx={{
+            fontSize: { xs: 28, md: 36 },
+            textAlign: "center",
+            fontFamily: "Monospace",
+            fontWeight: 600,
+          }}
         >
           MessageSpace
         </Typography>
