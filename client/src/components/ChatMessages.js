@@ -29,7 +29,11 @@ const ChatMessages = ({ userData, chatMessages }) => {
                 pl: 2,
                 pr: 2,
                 m: "3px",
-                borderRadius: { xs: "17px", md: "20px" },
+                borderTopLeftRadius: { xs: "17px", md: "20px" },
+                borderTopRightRadius: messagePos === "right" ? "0px" : { xs: "17px", md: "20px" },
+                borderBottomLeftRadius: messagePos === "left" ? "0px" : { xs: "17px", md: "20px" },
+                borderBottomRightRadius: { xs: "17px", md: "20px" },
+
                 backgroundColor: `chat.${messagePos}`,
                 display: "inline-block",
                 fontSize: { xs: "16px", md: "18px" },
