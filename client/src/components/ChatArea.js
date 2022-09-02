@@ -57,13 +57,14 @@ const ChatArea = ({ userData, socket }) => {
               <Typography sx={{ pl: 1, fontSize: "14px" }}>{msg.sender}</Typography>
             )}
             <Typography
+              color={`primary.${messagePos}ChatText`}
               sx={{
                 p: 1,
                 pl: 2,
                 pr: 2,
                 m: "3px",
                 borderRadius: { xs: "17px", md: "20px" },
-                backgroundColor: "#4db8ff",
+                backgroundColor: `primary.${messagePos}Chat`,
                 display: "inline-block",
                 fontSize: "18px",
                 maxWidth: { xs: "65vw", md: "45vw" },

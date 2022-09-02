@@ -1,10 +1,14 @@
 import { createTheme } from "@mui/material";
-import { red, deepPurple, indigo } from "@mui/material/colors";
+import { red, deepPurple, indigo, grey, blue } from "@mui/material/colors";
 
 export const themeLight = createTheme({
   palette: {
     primary: {
       main: indigo[300],
+      leftChat: grey[200],
+      rightChat: blue.A400,
+      leftChatText: "black",
+      rightChatText: "#fff",
     },
     secondary: {
       main: deepPurple[200],
