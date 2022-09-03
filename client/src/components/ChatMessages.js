@@ -34,6 +34,7 @@ const ChatMessages = ({ userData, chatMessages }) => {
         width: { xs: 32, md: 40 },
         height: { xs: 32, md: 40 },
         bgcolor: stringToColor(name),
+        fontSize: { xs: 16, md: 20 },
       },
       children: avatarName,
     };
@@ -50,7 +51,7 @@ const ChatMessages = ({ userData, chatMessages }) => {
         <Box key={i} sx={{ width: "100%", display: "flex", justifyContent: messagePos }}>
           <Box sx={{ display: "flex", flexDirection: "column" }}>
             {displayOtherName && (
-              <Typography sx={{ pl: { xs: 6, md: 8 }, fontSize: { xs: "13px", md: "14px" } }}>
+              <Typography sx={{ pl: { xs: 5, md: 7 }, fontSize: { xs: "13px", md: "14px" } }}>
                 {msg.sender}
               </Typography>
             )}
