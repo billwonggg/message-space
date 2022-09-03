@@ -2,13 +2,15 @@ import { useEffect, useState, useContext } from "react";
 import { Container, Grid, IconButton, Typography, TextField } from "@mui/material";
 import { FormControl, Box, Divider } from "@mui/material";
 import SendRoundedIcon from "@mui/icons-material/SendRounded";
-import ChatMessages from "./ChatMessages";
+import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import { SelectThemeContext } from "../theme/ThemeContext";
 import { sendNotification } from "../util/notificationHelper";
+import ChatMessages from "./ChatMessages";
 
 const ChatArea = ({ userData, socket }) => {
   const [message, setMessage] = useState("");
   const [chatMessages, setChatMessages] = useState([]);
+  const [listUsers, setListUsers] = useState([]);
   const [darkMode] = useContext(SelectThemeContext);
 
   const sendMessage = async () => {
@@ -35,6 +37,18 @@ const ChatArea = ({ userData, socket }) => {
     setChatMessages([...chatMessages, messageData]);
   };
 
+  const getUserList = () => {
+    if (!socket.connected) {
+      sendNotification("Error connecting to the server", "error", darkMode);
+      return;
+    }
+    try {
+      socket.emit("get_users_list", { name: userData.name, room: userData.room });
+    } catch (err) {
+      sendNotification("Server error, please try again later", "error", darkMode);
+    }
+  };
+
   useEffect(() => {
     const handler = (data) => {
       setChatMessages((messages) => [...messages, data]);
@@ -49,6 +63,12 @@ const ChatArea = ({ userData, socket }) => {
     };
     socket.on("receive_admin_message", handler);
     return () => socket.off("receive_admin_message");
+  });
+
+  useEffect(() => {
+    const handler = (data) => setListUsers(data);
+    socket.on("receive_users_list", handler);
+    return () => socket.off("receive_users_list");
   });
 
   const handleMessageChange = (event) => {
@@ -75,6 +95,9 @@ const ChatArea = ({ userData, socket }) => {
         >
           Room {userData.room}
         </Typography>
+        <IconButton onClick={getUserList}>
+          <FormatListBulletedIcon />
+        </IconButton>
         <Typography
           gutterBottom
           fontFamily="monospace"
