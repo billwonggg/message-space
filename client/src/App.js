@@ -4,6 +4,8 @@ import io from "socket.io-client";
 import RegisterPage from "./pages/RegisterPage";
 import ChatPage from "./pages/ChatPage";
 import { SelectThemeProvider } from "./theme/ThemeContext";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
 import "./App.css";
 
 const socket = io.connect("http://localhost:3001");
@@ -16,6 +18,7 @@ const App = () => {
 
   return (
     <SelectThemeProvider>
+      <ToastContainer />
       <BrowserRouter>
         <Routes>
           <Route
