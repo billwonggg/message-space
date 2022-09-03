@@ -5,6 +5,7 @@ const getToastType = (type) => {
   if (type === "info") toastType = toast.TYPE.INFO;
   else if (type === "error") toastType = toast.TYPE.ERROR;
   else if (type === "success") toastType = toast.TYPE.SUCCESS;
+  else if (type === "warning") toastType = toast.TYPE.WARNING;
   return toastType;
 };
 

@@ -38,6 +38,8 @@ io.on("connection", (socket) => {
   console.log(`User connected: ${socket.id}`);
 
   socket.on("join_room", (data) => {
+    socket.username = data.name;
+    socket.room = data.room;
     socket.join(data.room);
     joinRoomUpdateMap(data.room, data.name);
     socket
@@ -65,6 +67,17 @@ io.on("connection", (socket) => {
       .to(data.room)
       .emit("receive_admin_message", { msg: `${data.name} has left the room.`, type: "info" });
     console.log(`${data.name} left room ${data.room}`);
+  });
+
+  socket.on("disconnect", () => {
+    console.log(`${socket.username} has disconnected from room ${socket.room}`);
+    if (socket.username && socket.room) {
+      leaveRoomUpdateMap(socket.room, socket.username);
+      io.in(socket.room).emit("receive_admin_message", {
+        msg: `${socket.username} has disconnected.`,
+        type: "warning",
+      });
+    }
   });
 });
 
