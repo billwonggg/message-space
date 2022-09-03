@@ -95,16 +95,18 @@ const ChatArea = ({ userData, socket }) => {
         >
           Room {userData.room}
         </Typography>
-        <IconButton onClick={getUserList}>
-          <FormatListBulletedIcon />
-        </IconButton>
-        <Typography
-          gutterBottom
-          fontFamily="monospace"
-          sx={{ fontSize: { xs: "14px", md: "18px" } }}
-        >
-          Signed in as {userData.name}
-        </Typography>
+        <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
+          <Typography
+            gutterBottom
+            fontFamily="monospace"
+            sx={{ fontSize: { xs: "14px", md: "18px" }, mr: "auto" }}
+          >
+            Signed in as {userData.name}
+          </Typography>
+          <IconButton onClick={getUserList}>
+            <FormatListBulletedIcon />
+          </IconButton>
+        </Box>
         <Divider />
         <Grid container spacing={2} alignItems="center">
           <Grid
