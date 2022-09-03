@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "@mui/material";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.min.css";
 import ChatBox from "../components/ChatBox";
 import ChatNavBar from "../components/ChatNavBar";
 
@@ -12,7 +10,7 @@ const ChatPage = (props) => {
   const theme = useTheme();
 
   useEffect(() => {
-    if (!userData.name || !userData.room) {
+    if (!userData.name || !userData.room || !props.socket.connected) {
       navigate("/");
     }
   });
@@ -26,7 +24,6 @@ const ChatPage = (props) => {
     >
       <ChatNavBar {...props} />
       <ChatBox {...props} />
-      <ToastContainer />
     </div>
   );
 };

@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { TextField, Select, InputLabel, FormControl, MenuItem, useTheme } from "@mui/material";
 import { Button, Typography, Box } from "@mui/material";
+import { SelectThemeContext } from "../theme/ThemeContext";
+import { sendNotification } from "../util/notificationHelper";
 import Footer from "../components/Footer";
 import ThemeButton from "../components/ThemeButton";
 
@@ -14,6 +16,7 @@ const RegisterPage = ({ setUserData, socket }) => {
   });
 
   const theme = useTheme();
+  const [darkMode] = useContext(SelectThemeContext);
 
   const navigate = useNavigate();
 
@@ -23,16 +26,22 @@ const RegisterPage = ({ setUserData, socket }) => {
 
   const joinRoom = (event) => {
     event.preventDefault();
-    if (!input.name || !input.room) return;
+    if (!input.name || !input.room) {
+      sendNotification("Please fill out the fields below", "error", darkMode);
+      return;
+    }
+
+    if (!socket.connected) {
+      sendNotification("Error connecting to the server", "error", darkMode);
+      return;
+    }
 
     try {
       socket.emit("join_room", input);
-      // clear input
       setUserData({ name: input.name, room: input.room });
       navigate("/chat");
     } catch (e) {
-      // handle error
-      console.log(e);
+      sendNotification("Server error, please try again later", "error", darkMode);
     }
   };
 

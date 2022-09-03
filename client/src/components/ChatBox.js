@@ -1,18 +1,23 @@
 import { useEffect, useState, useContext } from "react";
 import { Container, Grid, IconButton, Typography, TextField } from "@mui/material";
 import { FormControl, Box, Divider } from "@mui/material";
-import { toast } from "react-toastify";
 import SendRoundedIcon from "@mui/icons-material/SendRounded";
 import ChatMessages from "./ChatMessages";
 import { SelectThemeContext } from "../theme/ThemeContext";
+import { sendNotification } from "../util/notificationHelper";
 
 const ChatArea = ({ userData, socket }) => {
   const [message, setMessage] = useState("");
   const [chatMessages, setChatMessages] = useState([]);
-  const [darkMode, _] = useContext(SelectThemeContext);
+  const [darkMode] = useContext(SelectThemeContext);
 
   const sendMessage = async () => {
     if (message === "") return;
+
+    if (!socket.connected) {
+      sendNotification("Error connecting to the server", "error", darkMode);
+      return;
+    }
     const messageData = {
       sender: userData.name,
       room: userData.room,
@@ -23,7 +28,7 @@ const ChatArea = ({ userData, socket }) => {
     try {
       await socket.emit("send_message", messageData);
     } catch (err) {
-      console.log(err);
+      sendNotification("Server error, please try again later", "error", darkMode);
       return;
     }
     setMessage("");
@@ -38,23 +43,9 @@ const ChatArea = ({ userData, socket }) => {
     return () => socket.off("receive_message", handler);
   });
 
-  const getToastType = (type) => {
-    let toastType = null;
-    if (type === "info") toastType = toast.TYPE.INFO;
-    else if (type === "error") toastType = toast.TYPE.ERROR;
-    else if (type === "success") toastType = toast.TYPE.SUCCESS;
-    return toastType;
-  };
-
   useEffect(() => {
     const handler = (data) => {
-      const toastType = getToastType(data.type);
-      toast(data.msg, {
-        position: "top-center",
-        autoClose: 4000,
-        theme: darkMode ? "dark" : "light",
-        type: toastType,
-      });
+      sendNotification(data.msg, data.type, darkMode);
     };
     socket.on("receive_admin_message", handler);
     return () => socket.off("receive_admin_message");
