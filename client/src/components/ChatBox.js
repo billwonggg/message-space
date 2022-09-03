@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useState, useContext } from "react";
 import { Container, Grid, IconButton, Typography, TextField } from "@mui/material";
 import { FormControl, Box, Divider } from "@mui/material";
 import SendRoundedIcon from "@mui/icons-material/SendRounded";
@@ -7,10 +7,8 @@ import { SelectThemeContext } from "../theme/ThemeContext";
 import { sendNotification } from "../util/notificationHelper";
 import ChatMessages from "./ChatMessages";
 
-const ChatArea = ({ userData, socket }) => {
+const ChatArea = ({ userData, socket, chatMessages, setChatMessages }) => {
   const [message, setMessage] = useState("");
-  const [chatMessages, setChatMessages] = useState([]);
-  const [listUsers, setListUsers] = useState([]);
   const [darkMode] = useContext(SelectThemeContext);
 
   const sendMessage = async () => {
@@ -48,28 +46,6 @@ const ChatArea = ({ userData, socket }) => {
       sendNotification("Server error, please try again later", "error", darkMode);
     }
   };
-
-  useEffect(() => {
-    const handler = (data) => {
-      setChatMessages((messages) => [...messages, data]);
-    };
-    socket.on("receive_message", handler);
-    return () => socket.off("receive_message", handler);
-  });
-
-  useEffect(() => {
-    const handler = (data) => {
-      sendNotification(data.msg, data.type, darkMode);
-    };
-    socket.on("receive_admin_message", handler);
-    return () => socket.off("receive_admin_message");
-  });
-
-  useEffect(() => {
-    const handler = (data) => setListUsers(data);
-    socket.on("receive_users_list", handler);
-    return () => socket.off("receive_users_list");
-  });
 
   const handleMessageChange = (event) => {
     setMessage(event.target.value);
