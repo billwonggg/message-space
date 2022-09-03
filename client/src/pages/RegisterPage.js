@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { TextField, Select, InputLabel, FormControl, MenuItem, useTheme } from "@mui/material";
 import { Button, Typography, Box } from "@mui/material";
+import GroupsRoundedIcon from "@mui/icons-material/GroupsRounded";
 import { SelectThemeContext } from "../theme/ThemeContext";
 import { sendNotification } from "../util/notificationHelper";
 import Footer from "../components/Footer";
@@ -72,18 +73,21 @@ const RegisterPage = ({ setUserData, socket }) => {
           borderRadius: "10px",
         }}
       >
-        <Typography
-          component="h1"
-          sx={{
-            fontSize: { xs: 28, md: 36 },
-            textAlign: "center",
-            fontFamily: "Monospace",
-            fontWeight: 600,
-          }}
-        >
-          MessageSpace
-        </Typography>
-
+        <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <GroupsRoundedIcon sx={{ mr: 2, fontSize: { xs: "32px", md: "38px" } }} />
+          <Typography
+            component="h1"
+            display="inline-block"
+            sx={{
+              fontSize: { xs: 28, md: 36 },
+              textAlign: "center",
+              fontFamily: "Monospace",
+              fontWeight: 600,
+            }}
+          >
+            MessageSpace
+          </Typography>
+        </Box>
         <form noValidate onSubmit={joinRoom}>
           <TextField
             variant="outlined"

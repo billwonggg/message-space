@@ -10,7 +10,6 @@ const ChatNavBar = ({ userData, socket }) => {
   const theme = useTheme();
 
   const handleLogout = () => {
-    // TODO leave chat
     try {
       socket.emit("leave_room", userData);
       navigate("/");
