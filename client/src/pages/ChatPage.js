@@ -12,7 +12,7 @@ const ChatPage = ({ userData, socket }) => {
   const [darkMode] = useContext(SelectThemeContext);
 
   const [chatMessages, setChatMessages] = useState([]);
-  const [listUsers, setListUsers] = useState([]);
+  const [usersList, setUsersList] = useState([]);
 
   useEffect(() => {
     if (!userData.name || !userData.room || !socket.connected) {
@@ -37,7 +37,7 @@ const ChatPage = ({ userData, socket }) => {
   });
 
   useEffect(() => {
-    const handler = (data) => setListUsers(data);
+    const handler = (data) => setUsersList(data);
     socket.on("receive_users_list", handler);
     return () => socket.off("receive_users_list");
   });
@@ -55,6 +55,7 @@ const ChatPage = ({ userData, socket }) => {
         socket={socket}
         chatMessages={chatMessages}
         setChatMessages={setChatMessages}
+        usersList={usersList}
       />
     </div>
   );

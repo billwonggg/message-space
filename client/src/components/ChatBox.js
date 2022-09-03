@@ -2,12 +2,12 @@ import { useState, useContext } from "react";
 import { Container, Grid, IconButton, Typography, TextField } from "@mui/material";
 import { FormControl, Box, Divider } from "@mui/material";
 import SendRoundedIcon from "@mui/icons-material/SendRounded";
-import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import { SelectThemeContext } from "../theme/ThemeContext";
 import { sendNotification } from "../util/notificationHelper";
 import ChatMessages from "./ChatMessages";
+import ChatUsersList from "./ChatUsersList";
 
-const ChatArea = ({ userData, socket, chatMessages, setChatMessages }) => {
+const ChatArea = ({ userData, socket, chatMessages, setChatMessages, usersList }) => {
   const [message, setMessage] = useState("");
   const [darkMode] = useContext(SelectThemeContext);
 
@@ -35,7 +35,7 @@ const ChatArea = ({ userData, socket, chatMessages, setChatMessages }) => {
     setChatMessages([...chatMessages, messageData]);
   };
 
-  const getUserList = () => {
+  const getUsersList = () => {
     if (!socket.connected) {
       sendNotification("Error connecting to the server", "error", darkMode);
       return;
@@ -79,9 +79,7 @@ const ChatArea = ({ userData, socket, chatMessages, setChatMessages }) => {
           >
             Signed in as {userData.name}
           </Typography>
-          <IconButton onClick={getUserList}>
-            <FormatListBulletedIcon />
-          </IconButton>
+          <ChatUsersList usersList={usersList} getUsersList={getUsersList} />
         </Box>
         <Divider />
         <Grid container spacing={2} alignItems="center">
