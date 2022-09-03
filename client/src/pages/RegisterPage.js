@@ -67,7 +67,7 @@ const RegisterPage = ({ setUserData, socket }) => {
         boxShadow={3}
         backgroundColor="register.background"
         sx={{
-          width: { xs: "360px", md: "550px" },
+          width: { xs: "360px", md: "525px" },
           padding: { xs: 4, md: 8 },
           borderRadius: "10px",
         }}
