@@ -8,7 +8,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 import "./App.css";
 
-const socket = io.connect("http://localhost:4000");
+const socket = io.connect("http://localhost:80");
 
 const App = () => {
   const [userData, setUserData] = useState({
