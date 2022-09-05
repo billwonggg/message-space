@@ -8,6 +8,10 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 app.use(cors());
 
+app.get("/", (req, res) => {
+  res.send("Success!");
+});
+
 const server = http.createServer(app);
 
 const connectedUsers = new Map();

@@ -2,10 +2,9 @@ version: "3.8"
 
 services:
   client:
-    # build:
-    #   context: client
-    #   dockerfile: Dockerfile
-    image: billwongg/messagespace:client
+    build:
+      context: client
+      dockerfile: Dockerfile
 
     ports: # Port binding to host from docker container
       - 3000:3000 # Bind port 3000 of host to 3000 of container
@@ -13,12 +12,13 @@ services:
     container_name: client-docker
 
   api:
-    image: billwongg/messagespace:server
-    # build:
-    #   context: server
-    #   dockerfile: Dockerfile
+    build:
+      context: server
+      dockerfile: Dockerfile
+      
     environment:
       - PORT=$API_PORT
     ports:
       - $API_PORT:$API_PORT
+
     container_name: api-docker
