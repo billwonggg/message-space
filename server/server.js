@@ -74,7 +74,8 @@ io.on("connection", (socket) => {
   });
 
   // handle reconnection
-  socket.on("connect", () => {
+  socket.on("reconnection", (data) => {
+    if (!data.username || !data.room) return;
     if (socket.username && socket.room) {
       console.log(`${socket.username} has reconnected to room ${socket.room}.`);
       joinRoomUpdateMap(socket.room, socket.username);

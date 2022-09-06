@@ -17,6 +17,10 @@ const App = () => {
     room: undefined,
   });
 
+  socket.on("connect", () => {
+    socket.emit("reconnection", userData);
+  });
+
   return (
     <SelectThemeProvider>
       <ToastContainer />
