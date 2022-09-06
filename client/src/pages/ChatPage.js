@@ -15,9 +15,16 @@ const ChatPage = ({ userData, socket }) => {
   const [usersList, setUsersList] = useState([]);
 
   useEffect(() => {
-    if (!userData.name || !userData.room || !socket.connected) {
+    if (!userData.name || !userData.room) {
       navigate("/");
     }
+  });
+
+  useEffect(() => {
+    socket.on("disconnect", () => {
+      navigate("/");
+    });
+    return () => socket.off("disconnect");
   });
 
   useEffect(() => {

@@ -9,16 +9,12 @@ import { API_URL } from "./constants/apiRoutes";
 import "react-toastify/dist/ReactToastify.min.css";
 import "./App.css";
 
-const socket = io.connect(API_URL);
+const socket = io(API_URL);
 
 const App = () => {
   const [userData, setUserData] = useState({
     username: "",
     room: undefined,
-  });
-
-  socket.on("connect", () => {
-    if (userData.username && userData.room) socket.emit("client-reconnect");
   });
 
   return (
