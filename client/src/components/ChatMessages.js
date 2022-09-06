@@ -6,7 +6,7 @@ const ChatMessages = ({ userData, chatMessages }) => {
 
   useEffect(() => {
     lastMessage?.current?.scrollIntoView({ behavior: "smooth" });
-  });
+  }, [chatMessages]);
 
   const stringToColor = (string) => {
     let hash = 0;
