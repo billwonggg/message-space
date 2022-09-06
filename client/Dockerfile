@@ -10,4 +10,4 @@ RUN npm i
 
 COPY . .
 
-RUN npm start
+CMD npm start
