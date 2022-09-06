@@ -18,7 +18,7 @@ const App = () => {
   });
 
   socket.on("connect", () => {
-    socket.emit("reconnection", userData);
+    if (userData.username && userData.room) socket.emit("client-reconnect");
   });
 
   return (
