@@ -18,7 +18,7 @@ const connectedUsers = new Map();
 
 const io = new Server(server, {
   cors: {
-    origin: "*",
+    origin: ["http://localhost:3000", "https://message-space.web.app"],
     methods: ["GET", "POST"],
   },
 });
@@ -67,6 +67,9 @@ io.on("connection", (socket) => {
 
   socket.on("leave_room", (data) => {
     leaveRoomUpdateMap(data.room, data.name);
+    socket.leave(socket.room);
+    socket.username = undefined;
+    socket.room = undefined;
     socket
       .to(data.room)
       .emit("receive_admin_message", { msg: `${data.name} has left the room.`, type: "info" });
@@ -78,6 +81,7 @@ io.on("connection", (socket) => {
     if (socket.username && socket.room) {
       console.log(`${socket.username} has reconnected to room ${socket.room}.`);
       joinRoomUpdateMap(socket.room, socket.username);
+      socket.join(socket.room);
       io.in(socket.room).emit("receive_admin_message", {
         msg: `${socket.username} has reconnected.`,
         type: "success",
@@ -90,6 +94,7 @@ io.on("connection", (socket) => {
     if (socket.username && socket.room) {
       console.log(`${socket.username} has disconnected from room ${socket.room}.`);
       leaveRoomUpdateMap(socket.room, socket.username);
+      socket.leave(socket.room);
       io.in(socket.room).emit("receive_admin_message", {
         msg: `${socket.username} has disconnected.`,
         type: "warning",
