@@ -73,9 +73,22 @@ io.on("connection", (socket) => {
     console.log(`${data.name} left room ${data.room}`);
   });
 
-  socket.on("disconnect", () => {
-    console.log(`${socket.username} has disconnected from room ${socket.room}`);
+  // handle reconnection
+  socket.on("connect", () => {
     if (socket.username && socket.room) {
+      console.log(`${socket.username} has reconnected to room ${socket.room}.`);
+      joinRoomUpdateMap(socket.room, socket.username);
+      io.in(socket.room).emit("receive_admin_message", {
+        msg: `${socket.username} has reconnected.`,
+        type: "success",
+      });
+    }
+  });
+
+  // handle disconnection
+  socket.on("disconnect", () => {
+    if (socket.username && socket.room) {
+      console.log(`${socket.username} has disconnected from room ${socket.room}.`);
       leaveRoomUpdateMap(socket.room, socket.username);
       io.in(socket.room).emit("receive_admin_message", {
         msg: `${socket.username} has disconnected.`,
