@@ -33,12 +33,12 @@ const RegisterPage = ({ setUserData, socket }) => {
   const joinRoom = async (event) => {
     event.preventDefault();
     if (loading) return;
-    loading = true;
     if (!input.name || !input.room) {
       sendNotif("Please fill out all the fields below", "error", darkMode);
       return;
     }
 
+    loading = true;
     const id = loadingNotif("Connecting to the server...", darkMode);
 
     let tries = 0;
@@ -46,6 +46,7 @@ const RegisterPage = ({ setUserData, socket }) => {
       if (tries === 10) {
         // after 45 seconds, send error message
         updateNotif(id, "Connection failed, try again later", "error", darkMode);
+        loading = false;
         return;
       }
       // try to connect every 5 seconds (Azure cold start)
