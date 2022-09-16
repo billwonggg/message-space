@@ -4,7 +4,7 @@ import { useTheme } from "@mui/material";
 import ChatBox from "../components/ChatBox";
 import ChatNavBar from "../components/ChatNavBar";
 import { SelectThemeContext } from "../theme/ThemeContext";
-import { sendNotification } from "../util/notificationHelper";
+import { sendNotif } from "../util/notificationHelper";
 
 const ChatPage = ({ userData, socket }) => {
   const navigate = useNavigate();
@@ -37,7 +37,7 @@ const ChatPage = ({ userData, socket }) => {
 
   useEffect(() => {
     const handler = (data) => {
-      sendNotification(data.msg, data.type, darkMode);
+      sendNotif(data.msg, data.type, darkMode);
     };
     socket.on("receive_admin_message", handler);
     return () => socket.off("receive_admin_message");
