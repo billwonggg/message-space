@@ -9,12 +9,27 @@ const getToastType = (type) => {
   return toastType;
 };
 
-export const sendNotification = (msg, type, darkMode) => {
+export const sendNotif = (msg, type, darkMode) => {
   const toastType = getToastType(type);
   toast(msg, {
     position: "top-center",
-    autoClose: 4000,
+    autoClose: 3000,
     theme: darkMode ? "dark" : "light",
     type: toastType,
   });
+};
+
+export const updateNotif = (id, msg, type, darkMode) => {
+  toast.update(id, {
+    render: msg,
+    type: type,
+    isLoading: false,
+    autoClose: 3000,
+    position: "top-center",
+    theme: darkMode ? "dark" : "light",
+  });
+};
+
+export const loadingNotif = (msg, darkMode) => {
+  return toast.loading(msg, { theme: darkMode ? "dark" : "light", position: "top-center" });
 };

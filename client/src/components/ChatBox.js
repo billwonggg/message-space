@@ -3,7 +3,7 @@ import { Container, Grid, IconButton, Typography, TextField } from "@mui/materia
 import { FormControl, Box, Divider } from "@mui/material";
 import SendRoundedIcon from "@mui/icons-material/SendRounded";
 import { SelectThemeContext } from "../theme/ThemeContext";
-import { sendNotification } from "../util/notificationHelper";
+import { sendNotif } from "../util/notificationHelper";
 import ChatMessages from "./ChatMessages";
 import ChatUsersList from "./ChatUsersList";
 
@@ -15,7 +15,7 @@ const ChatArea = ({ userData, socket, chatMessages, setChatMessages, usersList }
     if (message === "") return;
 
     if (!socket.connected) {
-      sendNotification("Error connecting to the server", "error", darkMode);
+      sendNotif("Error connecting to the server", "error", darkMode);
       return;
     }
     const messageData = {
@@ -28,7 +28,7 @@ const ChatArea = ({ userData, socket, chatMessages, setChatMessages, usersList }
     try {
       await socket.emit("send_message", messageData);
     } catch (err) {
-      sendNotification("Server error, please try again later", "error", darkMode);
+      sendNotif("Server error, please try again later", "error", darkMode);
       return;
     }
     setMessage("");
@@ -37,13 +37,13 @@ const ChatArea = ({ userData, socket, chatMessages, setChatMessages, usersList }
 
   const getUsersList = () => {
     if (!socket.connected) {
-      sendNotification("Error connecting to the server", "error", darkMode);
+      sendNotif("Error connecting to the server", "error", darkMode);
       return;
     }
     try {
       socket.emit("get_users_list", { name: userData.name, room: userData.room });
     } catch (err) {
-      sendNotification("Server error, please try again later", "error", darkMode);
+      sendNotif("Server error, please try again later", "error", darkMode);
     }
   };
 
