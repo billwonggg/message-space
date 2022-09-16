@@ -1,0 +1,12 @@
+name: "Open web page"
+
+on:
+  schedule:
+    - cron: "0/30 0/1 * * *"
+
+jobs:
+  test_schedule:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Open site
+        run: xdg-open https://message-space.web.app
