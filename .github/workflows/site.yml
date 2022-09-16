@@ -8,5 +8,8 @@ jobs:
   test_schedule:
     runs-on: ubuntu-latest
     steps:
+      - name: Update & install
+        run: sudo apt-get update && sudo apt-get -y install wget
+
       - name: Open site
-        run: apt-get update && apt-get -y install wget && wget "https://message-space.web.app"
+        run: wget "https://message-space.web.app"
