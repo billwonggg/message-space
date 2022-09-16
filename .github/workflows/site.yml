@@ -9,4 +9,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Open site
-        run: xdg-open https://message-space.web.app
+        run: xdg-open "https://message-space.web.app"
