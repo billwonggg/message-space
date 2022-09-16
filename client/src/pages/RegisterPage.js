@@ -4,7 +4,7 @@ import { TextField, Select, InputLabel, FormControl, MenuItem, useTheme } from "
 import { Button, Typography, Box } from "@mui/material";
 import GroupsRoundedIcon from "@mui/icons-material/GroupsRounded";
 import { SelectThemeContext } from "../theme/ThemeContext";
-import { sendNotification } from "../util/notificationHelper";
+import { sendNotif, updateNotif, loadingNotif } from "../util/notificationHelper";
 import Footer from "../components/Footer";
 import ThemeButton from "../components/ThemeButton";
 
@@ -25,16 +25,33 @@ const RegisterPage = ({ setUserData, socket }) => {
     setInput({ ...input, [name]: event.target.value });
   };
 
-  const joinRoom = (event) => {
+  const sleep = (ms) => {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  };
+
+  let loading = false;
+  const joinRoom = async (event) => {
     event.preventDefault();
+    if (loading) return;
+    loading = true;
     if (!input.name || !input.room) {
-      sendNotification("Please fill out the fields below", "error", darkMode);
+      sendNotif("Please fill out all the fields below", "error", darkMode);
       return;
     }
 
-    if (!socket.connected) {
-      sendNotification("Error connecting to the server", "error", darkMode);
-      return;
+    const id = loadingNotif("Connecting to the server...", darkMode);
+
+    let tries = 0;
+    while (!socket.connected) {
+      if (tries === 10) {
+        // after 45 seconds, send error message
+        updateNotif(id, "Connection failed, try again later", "error", darkMode);
+        return;
+      }
+      // try to connect every 5 seconds (Azure cold start)
+      await sleep(5000);
+      socket.connect();
+      tries++;
     }
 
     try {
@@ -42,8 +59,10 @@ const RegisterPage = ({ setUserData, socket }) => {
       setUserData({ name: input.name, room: input.room });
       navigate("/chat");
     } catch (e) {
-      sendNotification("Server error, please try again later", "error", darkMode);
+      updateNotif(id, "Error joining the room", "error", darkMode);
     }
+    updateNotif(id, "Connected to the server", "success", darkMode);
+    loading = false;
   };
 
   return (
