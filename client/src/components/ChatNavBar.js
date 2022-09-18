@@ -25,8 +25,6 @@ const ChatNavBar = ({ userData, socket }) => {
           <GroupsRoundedIcon fontSize="large" sx={{ display: "flex", mr: 2 }} />
           <Typography
             noWrap
-            component="a"
-            href="/"
             sx={{
               mr: "auto",
               display: "flex",
