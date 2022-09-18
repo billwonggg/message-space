@@ -90,7 +90,7 @@ const RegisterPage = ({ setUserData, socket }) => {
         sx={{
           width: { xs: "360px", md: "525px" },
           padding: { xs: 4, md: 8 },
-          borderRadius: "10px",
+          borderRadius: { xs: "20px", md: "10px" },
         }}
       >
         <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
