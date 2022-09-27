@@ -6,10 +6,10 @@ on:
 
 jobs:
   deploy:
-    run:
-      working-directory: client
     runs-on: ubuntu-latest
     steps:
+      run:
+        working-directory: client
       - name: Checkout Repo
         uses: actions/checkout@master
       - name: Setup Node
