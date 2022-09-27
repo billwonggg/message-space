@@ -6,11 +6,11 @@ on:
 
 jobs:
   deploy:
+    defaults:
+      run:
+        working-directory: client # The working directory path
     runs-on: ubuntu-latest
     steps:
-      defaults:
-        run:
-          working-directory: client # The working directory path
       - name: Checkout Repo
         uses: actions/checkout@master
       - name: Setup Node
