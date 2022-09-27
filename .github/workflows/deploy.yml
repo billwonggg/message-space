@@ -8,8 +8,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      run:
-        working-directory: client
+      defaults:
+        run:
+          working-directory: client # The working directory path
       - name: Checkout Repo
         uses: actions/checkout@master
       - name: Setup Node
