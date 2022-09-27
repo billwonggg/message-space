@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useContext } from "react";
-import { useNavigate } from "react-router-dom";
 import { useTheme } from "@mui/material";
+import React, { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import ChatBox from "../components/ChatBox";
 import ChatNavBar from "../components/ChatNavBar";
 import { SelectThemeContext } from "../theme/ThemeContext";
 import { sendNotif } from "../util/notificationHelper";
+import "./ChatPage.css";
 
 const ChatPage = ({ userData, socket }) => {
   const navigate = useNavigate();
@@ -51,10 +52,8 @@ const ChatPage = ({ userData, socket }) => {
 
   return (
     <div
-      style={{
-        minHeight: "100vh",
-        backgroundImage: theme.palette.background.bgGradient,
-      }}
+      className="chat-container"
+      style={{ backgroundImage: theme.palette.background.bgGradient }}
     >
       <ChatNavBar userData={userData} socket={socket} />
       <ChatBox
