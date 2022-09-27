@@ -1,0 +1,11 @@
+:root {
+  --app-height: 100%;
+}
+
+html {
+  height: var(--app-height);
+}
+
+body {
+  height: var(--app-height);
+}

@@ -1,13 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import io from "socket.io-client";
-import RegisterPage from "./pages/RegisterPage";
-import ChatPage from "./pages/ChatPage";
-import { SelectThemeProvider } from "./theme/ThemeContext";
-import { ToastContainer, Slide } from "react-toastify";
-import { API_URL } from "./constants/apiRoutes";
+import { Slide, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
-import "./App.css";
+import io from "socket.io-client";
+import { API_URL } from "./constants/apiRoutes";
+import ChatPage from "./pages/ChatPage";
+import RegisterPage from "./pages/RegisterPage";
+import { SelectThemeProvider } from "./theme/ThemeContext";
 
 const socket = io(API_URL);
 
@@ -16,6 +15,16 @@ const App = () => {
     username: "",
     room: undefined,
   });
+
+  const appHeight = () => {
+    document.documentElement.style.setProperty("--app-height", `${window.innerHeight}px`);
+  };
+
+  useEffect(() => appHeight());
+  useEffect(() => {
+    window.addEventListener("resize", appHeight);
+    return () => window.removeEventListener("resize", appHeight);
+  }, []);
 
   return (
     <SelectThemeProvider>
