@@ -1,0 +1,6 @@
+.register-container {
+  height: var(--app-height);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,12 +1,22 @@
-import { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import { TextField, Select, InputLabel, FormControl, MenuItem, useTheme } from "@mui/material";
-import { Button, Typography, Box } from "@mui/material";
 import GroupsRoundedIcon from "@mui/icons-material/GroupsRounded";
-import { SelectThemeContext } from "../theme/ThemeContext";
-import { sendNotif, updateNotif, loadingNotif } from "../util/notificationHelper";
+import {
+  Box,
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+  Typography,
+  useTheme,
+} from "@mui/material";
+import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 import ThemeButton from "../components/ThemeButton";
+import { SelectThemeContext } from "../theme/ThemeContext";
+import { loadingNotif, sendNotif, updateNotif } from "../util/notificationHelper";
+import "./RegisterPage.css";
 
 const ROOMOPTIONS = [...Array(50).keys()];
 
@@ -68,13 +78,8 @@ const RegisterPage = ({ setUserData, socket }) => {
 
   return (
     <div
-      style={{
-        minHeight: "100vh",
-        backgroundImage: theme.palette.background.bgGradient,
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
+      className="register-container"
+      style={{ backgroundImage: theme.palette.background.bgGradient }}
     >
       <ThemeButton
         sx={{
