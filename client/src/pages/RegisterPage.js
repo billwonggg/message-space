@@ -53,14 +53,14 @@ const RegisterPage = ({ setUserData, socket }) => {
 
     let tries = 0;
     while (!socket.connected) {
-      if (tries === 10) {
-        // after 45 seconds, send error message
+      if (tries === 20) {
+        // after 60 seconds, send error message
         updateNotif(id, "Connection failed, try again later", "error", darkMode);
         loading = false;
         return;
       }
-      // try to connect every 5 seconds (Azure cold start)
-      await sleep(5000);
+      // try to connect every 3 seconds (Azure cold start)
+      await sleep(3000);
       socket.connect();
       tries++;
     }
