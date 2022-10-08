@@ -1,4 +1,4 @@
-name: "Open web page"
+name: "Backend Call"
 
 on:
   schedule:
@@ -12,4 +12,4 @@ jobs:
         run: sudo apt-get update && sudo apt-get -y install wget
 
       - name: Open site
-        run: wget "https://message-space.web.app"
+        run: wget "https://messagespace-server.azurewebsites.net"
